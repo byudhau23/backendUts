@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,3 +33,6 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/news/category/finance', [NewsController::class, 'finance']);
     Route::get('/news/category/automotive', [NewsController::class, 'automotive']);
 });
+
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
