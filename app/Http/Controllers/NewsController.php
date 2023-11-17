@@ -37,7 +37,6 @@ class NewsController extends Controller
                 'content' => 'requaired',
                 'url' => 'requaired',
                 'url_img' => 'requaired',
-                'published_at' => 'nullable',
                 'category' => 'requaired'
         ]);
         $news = News::create($input);
@@ -118,6 +117,80 @@ class NewsController extends Controller
 			return response()->json($response, 404);
 		}
 	}
+
+    public function search(Request $request, $title)
+    {
+        $news = News::where('title', 'like', '%' . $title . '%')->get();
+        if ($news->isEmpty()) {
+            $data = [
+                'message' => 'News not found'
+            ];
+
+            return response()->json($data, 404);
+        }
+        $data = [
+            'message' => 'Get Searched News',
+            'data' => $news
+        ];
+        return response()->json($news, 404);
+    }
+
+    public function sport()
+    {
+        $news = News::where('category', 'sport')->get();
+        if ($news->isEmpty()) {
+            $data = [
+                'message' => 'News not found'
+            ];
+
+            return response()->json($data, 404);
+        }
+        $data = [
+            'message' => 'Get Sport News',
+            'total' => $news->count(),
+            'data' => $news
+        ];
+
+        return response()->json($news, 200);
+    }
+
+    public function finance()
+    {
+        $news = News::where('category', 'finance')->get();
+        if ($news->isEmpty()) {
+            $data = [
+                'message' => 'News not found'
+            ];
+
+            return response()->json($data, 404);
+        }
+        $data = [
+            'message' => 'Get Finance News',
+            'total' => $news->count(),
+            'data' => $news
+        ];
+
+        return response()->json($news, 200);
+    }
+
+    public function automotive()
+    {
+        $news = News::where('category', 'automotive')->get();
+        if ($news->isEmpty()) {
+            $data = [
+                'message' => 'News not found'
+            ];
+
+            return response()->json($data, 404);
+        }
+        $data = [
+            'message' => 'Get Automotive News',
+            'total' => $news->count(),
+            'data' => $news
+        ];
+
+        return response('news.automotive', ['news' => $news]);
+    }
     
 }
 
