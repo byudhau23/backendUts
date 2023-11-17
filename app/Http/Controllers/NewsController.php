@@ -189,7 +189,7 @@ class NewsController extends Controller
             'data' => $news
         ];
 
-        return response('news.automotive', ['news' => $news]);
+        return response()->json($data, 200);
     }
     
 }
