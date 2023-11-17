@@ -17,7 +17,7 @@ class NewsController extends Controller
 		if (!empty($news)) {
 			$response = [
 				'message' => 'Menampilkan Semua Berita',
-				'data' => $news,
+				'data' => $news
 			];
 			return response()->json($response, 200);
 		} else {
@@ -30,15 +30,15 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
-        $input = $request->validate([
-                'title' => 'required',
-                'author' => 'requaired',
-                'description' => 'requaired',
-                'content' => 'requaired',
-                'url' => 'requaired',
-                'url_img' => 'requaired',
-                'category' => 'requaired'
-        ]);
+        $input = [
+                'title' => $request->title,
+                'author' => $request->author,
+                'description' => $request->description,
+                'content' => $request->content,
+                'url' => $request->url,
+                'url_img' => $request->url_img,
+                'category' => $request->category
+        ];
         $news = News::create($input);
 
 		$response = [
